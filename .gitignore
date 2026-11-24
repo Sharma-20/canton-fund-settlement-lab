@@ -1,0 +1,17 @@
+# Private runtime, build output and local editor state
+.runtime/
+.daml/
+log/
+.vscode/
+.idea/
+__pycache__/
+*.py[cod]
+*.log
+.DS_Store
+.env
+.env.*
+*.pem
+*.key
+auth.conf
+# Generated reruns stay local until explicitly reviewed
+evidence/local-review-*/

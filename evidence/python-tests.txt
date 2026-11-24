@@ -1,0 +1,19 @@
+test_complete_evidence (test_evidence.EvidenceTests) ... ok
+test_corrupt_assertion_rejected (test_evidence.EvidenceTests) ... ok
+test_duplicate_assertion_cannot_replace_missing_assertion (test_evidence.EvidenceTests) ... ok
+test_duplicate_http_check_cannot_replace_missing_check (test_evidence.EvidenceTests) ... ok
+test_incomplete_run_rejected (test_evidence.EvidenceTests) ... ok
+test_missing_party_cannot_skip_rights_validation (test_evidence.EvidenceTests) ... ok
+test_config_symlink_refused (test_local_config.LocalConfigTests) ... ok
+test_create_private_config (test_local_config.LocalConfigTests) ... ok
+test_extra_auth_override_refused (test_local_config.LocalConfigTests) ... ok
+test_public_binding_refused_without_overwrite (test_local_config.LocalConfigTests) ... ok
+test_reuse_keeps_key (test_local_config.LocalConfigTests) ... ok
+test_runtime_symlink_refused (test_local_config.LocalConfigTests) ... ok
+test_world_readable_key_refused (test_local_config.LocalConfigTests) ... ok
+test_world_readable_runtime_refused (test_local_config.LocalConfigTests) ... ok
+
+----------------------------------------------------------------------
+Ran 14 tests in 0.025s
+
+OK

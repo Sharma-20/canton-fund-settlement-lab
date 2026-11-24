@@ -1,0 +1,100 @@
+authenticated DAR upload: HTTP 200
+allocate issuer: HTTP 200
+restrict issuer: HTTP 200
+verify rights issuer: HTTP 200
+allocate buyer: HTTP 200
+restrict buyer: HTTP 200
+verify rights buyer: HTTP 200
+allocate seller: HTTP 200
+restrict seller: HTTP 200
+verify rights seller: HTTP 200
+allocate outsider: HTTP 200
+restrict outsider: HTTP 200
+verify rights outsider: HTTP 200
+issue cash: HTTP 200
+issue fund: HTTP 200
+seller proposal: HTTP 200
+before issuer offset: HTTP 200
+before issuer: HTTP 200
+before buyer offset: HTTP 200
+before buyer: HTTP 200
+before seller offset: HTTP 200
+before seller: HTTP 200
+before outsider offset: HTTP 200
+before outsider: HTTP 200
+missing buyer authority: HTTP 400
+authority after issuer offset: HTTP 200
+authority after issuer: HTTP 200
+authority after buyer offset: HTTP 200
+authority after buyer: HTTP 200
+authority after seller offset: HTTP 200
+authority after seller: HTTP 200
+authority after outsider offset: HTTP 200
+authority after outsider: HTTP 200
+insufficient cash proposal: HTTP 200
+insufficient cash before issuer offset: HTTP 200
+insufficient cash before issuer: HTTP 200
+insufficient cash before buyer offset: HTTP 200
+insufficient cash before buyer: HTTP 200
+insufficient cash before seller offset: HTTP 200
+insufficient cash before seller: HTTP 200
+insufficient cash before outsider offset: HTTP 200
+insufficient cash before outsider: HTTP 200
+insufficient cash: HTTP 400
+insufficient cash after issuer offset: HTTP 200
+insufficient cash after issuer: HTTP 200
+insufficient cash after buyer offset: HTTP 200
+insufficient cash after buyer: HTTP 200
+insufficient cash after seller offset: HTTP 200
+insufficient cash after seller: HTTP 200
+insufficient cash after outsider offset: HTTP 200
+insufficient cash after outsider: HTTP 200
+insufficient cash cleanup: HTTP 200
+late fund mismatch proposal: HTTP 200
+late fund mismatch before issuer offset: HTTP 200
+late fund mismatch before issuer: HTTP 200
+late fund mismatch before buyer offset: HTTP 200
+late fund mismatch before buyer: HTTP 200
+late fund mismatch before seller offset: HTTP 200
+late fund mismatch before seller: HTTP 200
+late fund mismatch before outsider offset: HTTP 200
+late fund mismatch before outsider: HTTP 200
+late fund mismatch: HTTP 400
+late fund mismatch after issuer offset: HTTP 200
+late fund mismatch after issuer: HTTP 200
+late fund mismatch after buyer offset: HTTP 200
+late fund mismatch after buyer: HTTP 200
+late fund mismatch after seller offset: HTTP 200
+late fund mismatch after seller: HTTP 200
+late fund mismatch after outsider offset: HTTP 200
+late fund mismatch after outsider: HTTP 200
+late fund mismatch cleanup: HTTP 200
+outsider cannot query buyer offset: HTTP 200
+outsider cannot query buyer: HTTP 403
+buyer cannot query seller offset: HTTP 200
+buyer cannot query seller: HTTP 403
+successful settlement: HTTP 200
+after issuer offset: HTTP 200
+after issuer: HTTP 200
+after buyer offset: HTTP 200
+after buyer: HTTP 200
+after seller offset: HTTP 200
+after seller: HTTP 200
+after outsider offset: HTTP 200
+after outsider: HTTP 200
+consumed proposal new command id: HTTP 404
+reuse after issuer offset: HTTP 200
+reuse after issuer: HTTP 200
+reuse after buyer offset: HTTP 200
+reuse after buyer: HTTP 200
+reuse after seller offset: HTTP 200
+reuse after seller: HTTP 200
+reuse after outsider offset: HTTP 200
+reuse after outsider: HTTP 200
+settlement flats buyer: HTTP 200
+settlement trees buyer: HTTP 200
+settlement flats seller: HTTP 200
+settlement trees seller: HTTP 200
+settlement flats outsider: HTTP 200
+settlement trees outsider: HTTP 200
+All live assertions passed.

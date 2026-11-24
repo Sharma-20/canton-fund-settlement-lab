@@ -1,0 +1,69 @@
+module Settlement where
+
+-- Synthetic assets only. Issuer authorizes creation; owner authorizes transfer.
+template Cash
+  with
+    issuer : Party
+    owner : Party
+    currency : Text
+    amount : Decimal
+  where
+    signatory issuer
+    observer owner
+    ensure amount > 0.0
+    choice TransferCash : ContractId Cash
+      with newOwner : Party
+      controller owner
+      do create this with owner = newOwner
+
+template FundUnit
+  with
+    issuer : Party
+    owner : Party
+    fund : Text
+    units : Decimal
+    readers : [Party]
+  where
+    signatory issuer
+    observer owner, readers
+    ensure units > 0.0
+    choice TransferFund : ContractId FundUnit
+      with newOwner : Party
+      controller owner
+      do create this with owner = newOwner; readers = []
+
+-- The seller commits the identified fund holding and the exact terms.
+-- Buyer authority arrives through Accept, not through observer status.
+template Proposal
+  with
+    issuer : Party
+    seller : Party
+    buyer : Party
+    fundId : ContractId FundUnit
+    fund : Text
+    units : Decimal
+    currency : Text
+    price : Decimal
+  where
+    signatory seller
+    observer buyer
+    ensure units > 0.0 && price > 0.0 && seller /= buyer
+    choice Accept : (ContractId Cash, ContractId FundUnit)
+      with cashId : ContractId Cash
+      controller buyer
+      do
+        cash <- fetch cashId
+        assertMsg "cash owner mismatch" (cash.owner == buyer)
+        assertMsg "cash issuer mismatch" (cash.issuer == issuer)
+        assertMsg "currency mismatch" (cash.currency == currency)
+        assertMsg "exact cash quantity required" (cash.amount == price)
+        paid <- exercise cashId TransferCash with newOwner = seller
+        -- Deliberately validate the second leg after the first exercise:
+        -- a later failure must roll back the tentative cash transfer too.
+        holding <- fetch fundId
+        assertMsg "fund owner mismatch" (holding.owner == seller)
+        assertMsg "fund issuer mismatch" (holding.issuer == issuer)
+        assertMsg "fund identifier mismatch" (holding.fund == fund)
+        assertMsg "exact fund quantity required" (holding.units == units)
+        delivered <- exercise fundId TransferFund with newOwner = buyer
+        pure (paid, delivered)

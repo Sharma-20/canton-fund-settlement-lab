@@ -1,0 +1,2 @@
+PASS: 7 Script tests; 99 HTTP checks; 48 live assertions; exact party rights; JWT scan.
+Local signing-key scan: checked

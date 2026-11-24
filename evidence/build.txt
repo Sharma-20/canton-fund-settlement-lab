@@ -1,0 +1,32 @@
+WARNING: Daml Assistant has been deprecated and replaced with the Digital Asset Package Manager (DPM)
+See installation here: https://docs.digitalasset.com/build/3.4/dpm/dpm.html
+Daml Assistant will be removed in 3.5
+You can disable this warning with --no-legacy-assistant-warning
+
+Running single package build of canton-settlement-reliability-lab as no multi-package.yaml was found.
+
+2026-11-24 18:12:00.30 [INFO]  [build] 
+Compiling canton-settlement-reliability-lab to a DAR.
+File:     daml/Tests.daml
+Hidden:   no
+Range:    10:1-10:8
+Source:   Core to Daml-LF
+Severity: DsWarning
+Message: 
+[0;93mUsed tuple of size 7. Daml only has Show, Eq, Ord instances for tuples of size <= 5.[0m
+File:     daml
+Hidden:   no
+Range:    1:1-2:1
+Source:   Daml-LF typechecker
+Severity: DsWarning
+Message: 
+[0;93mwarning while type checking package:
+  This package defines templates or interfaces, and depends on daml-script.
+  Uploading this package to a ledger will also upload daml-script, which will bloat the package store on your participant.
+  It is recommended that scripts/tests are defined in a separate package to your templates, and that
+  you remove `d6ae29f2d88523d91c59863f5d6098f3031108ee5e2a3383faf24b3fdbafb036 (daml-script, 3.4.11)` from the dependencies in your daml.yaml
+  Upgrade this warning to an error -Werror=template-interface-depends-on-daml-script
+  Disable this warning entirely with -Wno-template-interface-depends-on-daml-script[0m
+
+2026-11-24 18:12:01.32 [INFO]  [build] 
+Created .daml/dist/canton-settlement-reliability-lab-0.1.0.dar

@@ -1,0 +1,55 @@
+WARNING: Daml Assistant has been deprecated and replaced with the Digital Asset Package Manager (DPM)
+See installation here: https://docs.digitalasset.com/build/3.4/dpm/dpm.html
+Daml Assistant will be removed in 3.5
+You can disable this warning with --no-legacy-assistant-warning
+
+File:     daml/Tests.daml
+Hidden:   no
+Range:    10:1-10:8
+Source:   Core to Daml-LF
+Severity: DsWarning
+Message: 
+[0;93mUsed tuple of size 7. Daml only has Show, Eq, Ord instances for tuples of size <= 5.[0m
+[4;1m
+Test Summary[m
+
+daml/Tests.daml:positiveAmounts: ok, 0 active contracts, 2 transactions.
+daml/Tests.daml:repeatedSettlement: ok, 2 active contracts, 5 transactions.
+daml/Tests.daml:insufficientCash: ok, 3 active contracts, 4 transactions.
+daml/Tests.daml:lateFailureRollback: ok, 4 active contracts, 5 transactions.
+daml/Tests.daml:matchingTerms: ok, 9 active contracts, 14 transactions.
+daml/Tests.daml:missingAuthority: ok, 3 active contracts, 4 transactions.
+daml/Tests.daml:successfulSettlement: ok, 2 active contracts, 4 transactions.
+Modules internal to this package:
+- Internal templates
+  3 defined
+  3 (100.0%) created
+- Internal template choices
+  6 defined
+  3 ( 50.0%) exercised
+- Internal interface implementations
+  0 defined
+    0 internal interfaces
+    0 external interfaces
+- Internal interface choices
+  0 defined
+  0 (100.0%) exercised
+Modules external to this package:
+- External templates
+  0 defined
+  0 (100.0%) created in any tests
+  0 (100.0%) created in internal tests
+  0 (100.0%) created in external tests
+- External template choices
+  0 defined
+  0 (100.0%) exercised in any tests
+  0 (100.0%) exercised in internal tests
+  0 (100.0%) exercised in external tests
+- External interface implementations
+  0 defined
+- External interface choices
+  0 defined
+  0 (100.0%) exercised in any tests
+  0 (100.0%) exercised in internal tests
+  0 (100.0%) exercised in external tests
+

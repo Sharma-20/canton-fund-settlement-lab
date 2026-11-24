@@ -1,0 +1,5 @@
+WARNING: Daml Assistant has been deprecated and replaced with the Digital Asset Package Manager (DPM)
+Daml Assistant will be removed in 3.5
+Starting Canton sandbox.
+Listening at port 17601
+Canton sandbox is ready.

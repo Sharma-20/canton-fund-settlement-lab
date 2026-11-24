@@ -1,0 +1,91 @@
+{
+  "classification": "same-machine fresh-workdir fresh-ledger rerun; NOT independent reproduction",
+  "startedUtc": "20261124T181159Z",
+  "os": "macOS-26.5.2-arm64-arm-64bit",
+  "commands": [
+    {
+      "argv": [
+        "daml",
+        "version"
+      ],
+      "exitCode": 0,
+      "output": "versions.txt"
+    },
+    {
+      "argv": [
+        "java",
+        "-version"
+      ],
+      "exitCode": 0,
+      "output": "java-version.txt"
+    },
+    {
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "--version"
+      ],
+      "exitCode": 0,
+      "output": "python-version.txt"
+    },
+    {
+      "argv": [
+        "daml",
+        "build"
+      ],
+      "exitCode": 0,
+      "output": "build.txt"
+    },
+    {
+      "argv": [
+        "daml",
+        "test"
+      ],
+      "exitCode": 0,
+      "output": "daml-test.txt"
+    },
+    {
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "scripts/live.py"
+      ],
+      "exitCode": 0,
+      "output": "live-run.txt"
+    },
+    {
+      "argv": [
+        "/Library/Developer/CommandLineTools/usr/bin/python3",
+        "scripts/check-evidence.py"
+      ],
+      "exitCode": 0,
+      "output": "check-evidence.txt"
+    }
+  ],
+  "status": "passed",
+  "retainedHostDependencies": "Existing SDK 3.4.11, Java, Python, Assistant and user-level caches",
+  "sourceSha256": {
+    "daml.yaml": "82011c4a521d31b16f40f7e73e85426fffc46ab579239b15a08785f45b9dee67",
+    "daml/Settlement.daml": "e77446aa7e433c4c3a10217a242f3cd4f0d069062d5a25b1250e2f3ebede96e6",
+    "daml/Tests.daml": "f0f08fb26dcb19734acb06e83364c91d06c499df3cd015b63c979d8daa9a9603",
+    "scripts/check-evidence.py": "c46f296d507dc7ff2c92bad722096e8ac9f4105982ed768ee9c10d03f8e145dd",
+    "scripts/live.py": "619d9dbf1247502b83a2d34e8284b062e0a694798f95d9e7dc8f2bacfd562a76",
+    "scripts/local_config.py": "6a5da446bef2811f34cdc452476e527cb78f51db65c155db01df6d3a0cb4976b",
+    "scripts/prepare.py": "adf9d180faee30a96258a7f1ef5b439913948477b22c08d11cfc19e0233d9d1c",
+    "scripts/reproduce-local.py": "87032c6cbd7dee16a423b897fe82aeb8a60fd12121e7ee9f2aa6ca4a27f18a5b",
+    "scripts/start-ledger.sh": "3b0ad6a50394667d71f1e97316c5a04041d4d8c47cdaba9a97ff46795573817d"
+  },
+  "evidenceSha256": {
+    "live-run.txt": "ec15a7be66ca65017f77ba4b5baf9dfe22150465e768921c2b3848f866969317",
+    "versions.txt": "83d9cdc73b4acf9b08168d98b814032a0b1be6e7876dc281bc35a0b3b5f64e1d",
+    "live-api.json": "320fb94e2b6312de92afa55f7006e3a699ac6ab3aec2ce662ccbd377690dbf4f",
+    "check-evidence.txt": "954479013ef2f0d8ad8da5dd282b8e5ad6180f72538681cd63d1cec50ff18052",
+    "daml-test.txt": "d3e72af8c2f32319f3ea8207a48ac89abe5049146b5fe6bd3ef77ea272473780",
+    "build.txt": "c126290a11f0fc257851ec9a09f788180bf78fabdd897a31e11cf31dd1a9a6f6",
+    "java-version.txt": "67732c1a52f008070b8222ad1b1694a9643188135d8fcb7878cb6c21cda20237",
+    "python-version.txt": "fd0fd4290ad100adc37e4a82e45f821faeacbecae70f4d3eba08e85be138c632",
+    "startup.txt": "20541751d018f97978b6c3ed825e0ca2f26bba2862dce5a4448d1d5ee61cf254"
+  },
+  "darSha256": "9da11a4d5d1ca866faa33d33c442b798b8b00b26f307349729bdb4b4bc710404",
+  "openapiSha256": "10ccc8f520e13cd82410fa650a50cb7e34dcd478e4635ce7814179ecfaf17047",
+  "ledgerStopped": true,
+  "finishedUtc": "2026-11-24T18:12:23.593830+00:00"
+}

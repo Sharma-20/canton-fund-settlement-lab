@@ -1,0 +1,17 @@
+{
+  "description": "Observed installed artifacts, rechecked 24 November 2026; not publisher signature verification. Binaries not redistributed.",
+  "artifacts": {
+    "SDK_3_4_11/canton/canton.jar": {
+      "sha256": "1ad59a69073fde29a7141535a845589d6a2ef5401d9fbeab9698bc8243e3b4d5",
+      "bytes": 308456711
+    },
+    "SDK_3_4_11/damlc/damlc": {
+      "sha256": "994ac671cab9de3d60377f7825d10a2e0c4b23a8cb694c37dcd7e07b4dc97078",
+      "bytes": 139968752
+    },
+    "SDK_3_4_11/NOTICES": {
+      "sha256": "833af60970e888b07c4b9bf86091e7c29c41bf8d84d407851413e5dfe525a1cf",
+      "bytes": 769567
+    }
+  }
+}

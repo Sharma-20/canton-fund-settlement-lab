@@ -1,0 +1,91 @@
+module Tests where
+
+import Daml.Script
+import DA.Assert
+import DA.Foldable (forA_)
+
+import Settlement
+
+fixture : Decimal -> Script (Party, Party, Party, Party, ContractId Cash, ContractId FundUnit, ContractId Proposal)
+fixture cashAmount = script do
+  issuer <- allocateParty "issuer"
+  buyer <- allocateParty "buyer"
+  seller <- allocateParty "seller"
+  outsider <- allocateParty "outsider"
+  c <- submit issuer do createCmd (Cash issuer buyer "USD-SYN" cashAmount)
+  f <- submit issuer do createCmd (FundUnit issuer seller "FUND-SYN" 10.0 [buyer])
+  p <- submit seller do createCmd (Proposal issuer seller buyer f "FUND-SYN" 10.0 "USD-SYN" 100.0)
+  pure (issuer, buyer, seller, outsider, c, f, p)
+
+successfulSettlement : Script ()
+successfulSettlement = script do
+  (i,b,s,_,c,f,p) <- fixture 100.0
+  query @Cash i >>= assertEq [(c, Cash i b "USD-SYN" 100.0)]
+  query @FundUnit i >>= assertEq [(f, FundUnit i s "FUND-SYN" 10.0 [b])]
+  (c2,f2) <- submit b do exerciseCmd p (Accept c)
+  query @Cash i >>= assertEq [(c2, Cash i s "USD-SYN" 100.0)]
+  query @FundUnit i >>= assertEq [(f2, FundUnit i b "FUND-SYN" 10.0 [])]
+  query @Proposal s >>= assertEq []
+
+missingAuthority : Script ()
+missingAuthority = script do
+  (i,b,s,_,c,f,p) <- fixture 100.0
+  -- Seller sees proposal but cannot exercise the buyer-controlled choice.
+  submitMustFail s do exerciseCmd p (Accept c)
+  query @Cash i >>= assertEq [(c, Cash i b "USD-SYN" 100.0)]
+  query @FundUnit i >>= assertEq [(f, FundUnit i s "FUND-SYN" 10.0 [b])]
+  queryContractId s p >>= assertSome
+
+assertSome : Optional a -> Script ()
+assertSome x = assert (case x of Some _ -> True; None -> False)
+
+insufficientCash : Script ()
+insufficientCash = script do
+  (i,b,s,_,c,f,p) <- fixture 99.0
+  submitMustFail b do exerciseCmd p (Accept c)
+  query @Cash i >>= assertEq [(c, Cash i b "USD-SYN" 99.0)]
+  query @FundUnit i >>= assertEq [(f, FundUnit i s "FUND-SYN" 10.0 [b])]
+  queryContractId s p >>= assertSome
+
+repeatedSettlement : Script ()
+repeatedSettlement = script do
+  (i,b,s,_,c,_,p) <- fixture 100.0
+  (c2,f2) <- submit b do exerciseCmd p (Accept c)
+  submitMustFail b do exerciseCmd p (Accept c)
+  query @Cash i >>= assertEq [(c2, Cash i s "USD-SYN" 100.0)]
+  query @FundUnit i >>= assertEq [(f2, FundUnit i b "FUND-SYN" 10.0 [])]
+
+lateFailureRollback : Script ()
+lateFailureRollback = script do
+  (i,b,s,_,c,f,_) <- fixture 100.0
+  bad <- submit s do createCmd (Proposal i s b f "WRONG-FUND" 10.0 "USD-SYN" 100.0)
+  submitMustFail b do exerciseCmd bad (Accept c)
+  query @Cash i >>= assertEq [(c, Cash i b "USD-SYN" 100.0)]
+  query @FundUnit i >>= assertEq [(f, FundUnit i s "FUND-SYN" 10.0 [b])]
+  queryContractId s bad >>= assertSome
+
+positiveAmounts : Script ()
+positiveAmounts = script do
+  i <- allocateParty "issuer"
+  b <- allocateParty "buyer"
+  submitMustFail i do createCmd (Cash i b "USD-SYN" 0.0)
+  submitMustFail i do createCmd (FundUnit i b "FUND-SYN" (-1.0) [])
+  query @Cash i >>= assertEq []
+  query @FundUnit i >>= assertEq []
+
+matchingTerms : Script ()
+matchingTerms = script do
+  (i,b,s,o,c,f,_) <- fixture 100.0
+  let terms = Proposal i s b f "FUND-SYN" 10.0 "USD-SYN" 100.0
+  -- Each malformed proposal must leave the full issuer-visible asset set intact.
+  forA_ [(terms with issuer = o), (terms with currency = "WRONG"), (terms with units = 11.0), (terms with price = 99.0)] (\badTerms -> do
+    bad <- submit s do createCmd badTerms
+    submitMustFail b do exerciseCmd bad (Accept c)
+    query @Cash i >>= assertEq [(c, Cash i b "USD-SYN" 100.0)]
+    query @FundUnit i >>= assertEq [(f, FundUnit i s "FUND-SYN" 10.0 [b])]
+    queryContractId s bad >>= assertSome)
+  wrongFund <- submit o do createCmd (FundUnit o s "FUND-SYN" 10.0 [b])
+  bad <- submit s do createCmd (terms with fundId = wrongFund)
+  submitMustFail b do exerciseCmd bad (Accept c)
+  query @Cash i >>= assertEq [(c, Cash i b "USD-SYN" 100.0)]
+  query @FundUnit o >>= assertEq [(wrongFund, FundUnit o s "FUND-SYN" 10.0 [b])]

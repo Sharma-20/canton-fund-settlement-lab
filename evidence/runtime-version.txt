@@ -1,0 +1,4 @@
+Canton: 3.4.11
+Daml Libraries: 3.4.11
+Stable Canton protocol versions: List(34)
+Preview Canton protocol versions: List()
